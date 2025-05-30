@@ -1,3 +1,4 @@
 .python-version
 .DS_Store
 demo.cast
+__pycache__
