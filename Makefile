@@ -16,5 +16,3 @@ render-start:
 
 lint:
 	uv run ruff check
-
-check: test lint
