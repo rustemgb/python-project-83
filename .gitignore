@@ -1,5 +1,3 @@
-.python-version
 .DS_Store
 demo.cast
 __pycache__
-.env
