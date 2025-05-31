@@ -17,4 +17,4 @@ jobs:
           uv sync
       - name: lint
         run: |
-          uv run ruff check .
+          make lint
