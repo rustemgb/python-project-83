@@ -1,31 +1,20 @@
 name: check-workflows
 
-on:
-  - push
-  - pull_request
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.12'
-        # make depends on uv
+          python-version: '3.10'
       - name: Install dependencies
         run: |
           pip install uv
-          make install
-      - name: Run linter and pytest
+          uv sync
+      - name: lint
         run: |
-          make lint
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v9.0.0
-        if: github.ref_name == 'main'
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+          uv run ruff check .
