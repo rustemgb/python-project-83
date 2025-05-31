@@ -14,5 +14,5 @@ build:
 render-start:
 	gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
-check:
-	uv run ruff check
+lint:
+	ruff check
