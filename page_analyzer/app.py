@@ -1,9 +1,9 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, flash
-from page_analyzer.data_base import save_url
+from flask import Flask, flash, render_template, request
 
+from page_analyzer.data_base import save_url
 
 load_dotenv()
 app = Flask(__name__)
