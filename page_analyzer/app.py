@@ -1,12 +1,15 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, flash, render_template, request, redirect, url_for
-from page_analyzer.url_validator import validate_url
+from flask import Flask, flash, redirect, render_template, request, url_for
+
+from page_analyzer.data_base import (
+    get_db_connection,
+    get_existing_urls,
+    save_url,
+)
 from page_analyzer.parser import parse_url
-
-
-from page_analyzer.data_base import get_db_connection, save_url, get_existing_urls
+from page_analyzer.url_validator import validate_url
 
 load_dotenv()
 app = Flask(__name__)
@@ -24,7 +27,7 @@ def create_url():
     error_message = validate_url(input_url)
     if error_message:
         flash(error_message, "error")
-        return render_template ("index.html", url=input_url), 422
+        return render_template("index.html", url=input_url), 422
     base_input_domain = parse_url(input_url)
     existing_urls = get_existing_urls()
     if existing_urls:
